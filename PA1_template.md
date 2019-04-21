@@ -67,7 +67,7 @@ names(activity)
 
 For this part of the assignment, I'll ignore the missing values in the dataset.
 
-First I calculate the total number of steps taken per day:
+First I **calculate the total number of steps taken per day**:
 
 
 ```r
@@ -85,7 +85,7 @@ head(totalStepsPerDay) # The default for aggregate is to ignore missing values i
 ## 6 2012-10-07 11015
 ```
 
-Now, I make a histogram of the total number of steps taken each day:
+Now, I make a **histogram of the total number of steps taken each day**:
 
 ```r
 library(ggplot2)
@@ -94,7 +94,7 @@ ggplot(totalStepsPerDay, aes(x = steps)) + geom_histogram(bins = 10)
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-Finally, I calculate and report the mean and median of the total number of steps taken per day:
+Finally, I **calculate the mean and median of the total number of steps taken per day**:
 
 The mean of the total number of steps taken per day is given as:
 
@@ -165,8 +165,7 @@ I believe that the second approach above is the correct one, and I'll stick with
 ### What is the average daily activity pattern?
 Now we look at the average daily activity pattern.
 
-First, I make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, 
-averaged across all days (y-axis)
+First, I make a **time series plot of the 5-minute interval and the average number of steps taken, averaged across all days**
 
 
 ```r
@@ -177,7 +176,7 @@ plot(x = avgStepsPerInterval$interval, y = avgStepsPerInterval$steps, type='l',
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
-Then, I find the 5-minute interval, on average across all the days in the dataset, that contains the maximum number of steps:
+Then, I find **the 5-minute interval, on average across all the days in the dataset, that contains the maximum number of steps**:
 
 
 ```r
@@ -190,7 +189,7 @@ avgStepsPerInterval[which.max(avgStepsPerInterval$steps), ]$interval
 
 ### Imputing missing values
 
-First I calculate and report the total number of missing values in the dataset:
+First I **calculate the total number of missing values in the dataset**:
 
 
 ```r
@@ -210,7 +209,7 @@ colSums(is.na(activity))
 ##     2304        0        0
 ```
 
-We see that there are missing values in the *steps* variable. There can be many strategies for filling in all of the missing values in the dataset. For example:
+We see that there are missing values in the *steps* variable. There can be many **strategies for filling in all of the missing values in the dataset**. For example:
 
 - We could use the mean/median for that day.
 - We could use the mean for that 5-minute interval.
@@ -218,7 +217,7 @@ We see that there are missing values in the *steps* variable. There can be many 
 
 For this assignment, __I have decided to use the mean for the 5-minute interval__.
 
-I create a new dataset that is equal to the original dataset but with the missing data filled in:
+I **create a new dataset that is equal to the original dataset but with the missing data filled in**:
 
 
 ```r
@@ -242,7 +241,7 @@ colSums(is.na(activity2))
 ##        0        0        0
 ```
 
-Then, I again make a histogram of the total number of steps taken each day and calculate the mean and median total number of steps taken per day. 
+Then, I again make a **histogram of the total number of steps taken each day** and **calculate the mean and median total number of steps taken per day**. 
 
 
 ```r
@@ -276,7 +275,7 @@ We see that, compared to the first part of the assignment, now our mean and medi
 
 In this section, we use the dataset with the filled-in missing values, i.e. activity2.
 
-First, I create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+First, I **create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day**:
 
 
 ```r
@@ -284,7 +283,7 @@ activity2$day <- ifelse(as.POSIXlt(activity2$date)$wday%%6 == 0, "weekend", "wee
 activity2$day <- factor(activity2$day,levels=c("weekday","weekend"))
 ```
 
-Then, I make use of the **lattice** package to create a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged  across all weekday days or weekend days (y-axis). 
+Then, I make use of the **lattice** package to **create a panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, averaged  across all weekday days or weekend days**. 
 
 
 ```r
